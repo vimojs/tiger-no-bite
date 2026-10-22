@@ -1,0 +1,17 @@
+page {
+  background: #F7F5F0;
+  color: #332D28;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  font-size: 28rpx;
+}
+view, text, image, button, scroll-view { box-sizing: border-box; }
+button::after { border: none; }
+.page { padding: 28rpx 30rpx 40rpx; }
+.eyebrow { color: #8C7D6D; font-size: 22rpx; letter-spacing: 3rpx; }
+.title { color: #332D28; font-size: 42rpx; font-weight: 650; line-height: 1.35; }
+.subtitle { color: #8B8177; font-size: 25rpx; line-height: 1.7; }
+.section-head { display:flex; align-items:center; justify-content:space-between; margin: 36rpx 0 20rpx; }
+.section-title { font-size: 32rpx; font-weight: 650; }
+.link { color:#8A6E51; font-size:24rpx; }
+.primary-btn { background: #55483D; color: #fff; border-radius: 18rpx; font-size: 28rpx; }
+.card { background:#fff; border-radius:24rpx; overflow:hidden; box-shadow: 0 8rpx 28rpx rgba(72,54,36,.04); }

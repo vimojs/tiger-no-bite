@@ -1,0 +1,14 @@
+{
+  "description": "帘境 AR 窗帘预览小程序",
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "appid": "请替换为你的小程序AppID",
+  "projectname": "lianjing-miniapp"
+}

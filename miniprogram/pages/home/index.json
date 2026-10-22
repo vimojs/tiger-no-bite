@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText":"帘境 · 让窗更美",
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar/index"
+  }
+}

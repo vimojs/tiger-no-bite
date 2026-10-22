@@ -1,24 +1,35 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/home/index",
+    "pages/preview/index",
+    "pages/products/index",
+    "pages/profile/index",
+    "custom-tab-bar/index"
   ],
   "window": {
+    "navigationBarTitleText": "帘境",
+    "navigationBarBackgroundColor": "#F7F5F0",
     "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "backgroundColor": "#F7F5F0"
   },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/products/index",
+        "text": "选窗帘"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
   "style": "v2",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "defaultContentBox": true,
-      "tagNameStyleIsolation": "legacy",
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
-  },
-  "componentFramework": "glass-easel",
-  "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "sitemapLocation": "sitemap.json"
 }

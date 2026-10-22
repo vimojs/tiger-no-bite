@@ -1,0 +1,127 @@
+.products-page {
+  padding-top: 36rpx;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 130rpx);
+}
+
+.intro {
+  margin-top: 12rpx
+}
+
+.categories {
+  white-space: nowrap;
+  margin: 28rpx 0
+}
+
+.category-row {
+  display: flex;
+  gap: 14rpx
+}
+
+.category {
+  display: inline-block;
+  background: #EEE8DF;
+  color: #7F7469;
+  border-radius: 999rpx;
+  padding: 13rpx 25rpx;
+  font-size: 23rpx
+}
+
+.category.active {
+  background: #55483D;
+  color: #fff
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx
+}
+
+.product-card {
+  border-radius: 20rpx
+}
+
+.scene {
+  height: 250rpx;
+  background: linear-gradient(135deg, #EEE4D7, #CFC0AD);
+  position: relative;
+  overflow: hidden
+}
+
+.scene-window {
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  top: 20rpx;
+  bottom: 20rpx;
+  background: linear-gradient(135deg, #C8D8D3, #A3B5B0);
+  border: 8rpx solid #F8F2E8;
+  display: flex;
+  overflow: hidden
+}
+
+.scene-curtain {
+  width: 36%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--fabric) 0, var(--fabric) 7rpx, rgba(255, 255, 255, .65) 14rpx);
+  box-shadow: 2rpx 0 8rpx rgba(0, 0, 0, .12)
+}
+
+.scene-curtain.right {
+  margin-left: auto
+}
+
+.tag {
+  position: absolute;
+  left: 14rpx;
+  top: 14rpx;
+  background: rgba(255, 255, 255, .88);
+  border-radius: 999rpx;
+  padding: 6rpx 12rpx;
+  font-size: 18rpx;
+  color: #80664D
+}
+
+.info {
+  padding: 18rpx 16rpx 20rpx
+}
+
+.name {
+  display: block;
+  font-size: 25rpx;
+  font-weight: 650
+}
+
+.desc {
+  display: block;
+  color: #968A7E;
+  font-size: 20rpx;
+  margin-top: 8rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 14rpx
+}
+
+.price {
+  font-size: 29rpx;
+  color: #9A5944;
+  font-weight: 700
+}
+
+.unit {
+  font-size: 18rpx;
+  color: #A69A8D;
+  margin-left: 4rpx
+}
+
+.try {
+  font-size: 19rpx;
+  color: #80664D;
+  margin-left: auto
+}

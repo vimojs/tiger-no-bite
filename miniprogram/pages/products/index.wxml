@@ -1,0 +1,8 @@
+<view class="page products-page">
+  <view class="eyebrow">CURTAIN COLLECTION</view><view class="title">挑一款，喜欢的生活。</view><view class="subtitle intro">从光线、质感到颜色，找到适合你家的搭配。</view>
+  <scroll-view scroll-x class="categories"><view class="category-row"><text wx:for="{{categories}}" wx:key="*this" class="category {{selectedCategory === item ? 'active' : ''}}" data-category="{{item}}" bindtap="chooseCategory">{{item}}</text></view></scroll-view>
+  <view class="product-grid"><view class="card product-card" wx:for="{{filteredProducts}}" wx:key="id" data-id="{{item.id}}" bindtap="openPreview">
+    <view class="scene" style="--fabric:{{item.color}}"><view class="scene-window"><view class="scene-curtain"></view><view class="scene-curtain right"></view></view><text class="tag">{{item.tag}}</text></view>
+    <view class="info"><text class="name">{{item.name}}</text><text class="desc">{{item.desc}}</text><view class="price-row"><text class="price">¥{{item.price}}</text><text class="unit">/㎡ 起</text><text class="try">去试搭 →</text></view></view>
+  </view></view>
+</view>

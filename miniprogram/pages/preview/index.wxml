@@ -1,0 +1,105 @@
+<view class="preview-page">
+  <view class="stage">
+    <view class="stage-room">
+      <view class="stage-glow"></view>
+      <view class="stage-window">
+
+        <view class="stage-glass" wx:if="{{!cameraReady}}">
+          <!-- 左侧真实花色 -->
+          <view class="stage-curtain left">
+            <image class="stage-curtain-texture" src="{{selectedTexture}}" mode="aspectFill" />
+          </view>
+
+          <!-- 右侧真实花色 -->
+          <view class="stage-curtain right">
+            <image class="stage-curtain-texture" src="{{selectedTexture}}" mode="aspectFill" />
+          </view>
+
+          <view class="stage-cross"></view>
+        </view>
+
+        <camera wx:if="{{cameraActive}}" class="camera-live" device-position="back" flash="off" bindinitdone="onCameraReady" binderror="onCameraError" />
+
+        <!-- 摄像头两侧固定窗帘 -->
+        <cover-view wx:if="{{cameraReady}}" class="camera-curtain-overlay">
+          <!-- 左侧窗帘 -->
+          <cover-view class="camera-curtain left {{curtainClosed ? 'closed' : 'open'}}" style="background-color: {{selectedColor}}; background-image: url('{{selectedTexture}}');">
+            <cover-view class="fold fold-dark"></cover-view>
+            <cover-view class="fold fold-light"></cover-view>
+            <cover-view class="fold fold-dark fold-third"></cover-view>
+            <cover-view class="fold fold-light fold-fourth"></cover-view>
+            <cover-view class="fold fold-dark fold-fifth"></cover-view>
+          </cover-view>
+
+          <!-- 右侧窗帘 -->
+          <cover-view class="camera-curtain right {{curtainClosed ? 'closed' : 'open'}}" style="background-color: {{selectedColor}}; background-image: url('{{selectedTexture}}');">
+            <cover-view class="fold fold-dark"></cover-view>
+            <cover-view class="fold fold-light"></cover-view>
+            <cover-view class="fold fold-dark fold-third"></cover-view>
+            <cover-view class="fold fold-light fold-fourth"></cover-view>
+            <cover-view class="fold fold-dark fold-fifth"></cover-view>
+          </cover-view>
+        </cover-view>
+      </view>
+      <view class="stage-floor"></view>
+      <view class="stage-plant">
+        <view class="leaves"></view>
+        <view class="pot"></view>
+      </view>
+      <view class="recognition">
+        <view class="corner tl"></view>
+        <view class="corner tr"></view>
+        <view class="corner bl"></view>
+        <view class="corner br"></view><text>窗户区域示意</text>
+      </view>
+    </view>
+    <view class="stage-top">
+      <view class="status-pill">
+        <view class="status-dot"></view>{{statusText}}
+      </view>
+      <view class="camera-button" bindtap="toggleCamera">{{cameraActive ? '×' : '◎'}}</view>
+    </view>
+    <view class="stage-bottom-tools">
+      <view class="tool" bindtap="toggleManual"><text class="tool-icon">⌗</text><text>调整窗框</text></view>
+      <view class="tool" bindtap="toggleCurtain" wx:if="{{cameraActive}}">
+        <text class="tool-icon">{{curtainClosed ? '◧' : '◨'}}</text>
+        <text>{{curtainClosed ? '打开窗帘' : '关闭窗帘'}}</text>
+      </view>
+      <view class="tool" bindtap="toggleCamera">
+        <text class="tool-icon">{{cameraActive ? '×' : '◉'}}</text>
+        <text>{{cameraActive ? '关闭摄像头' : '开启摄像头'}}</text>
+      </view>
+      <view class="tool" bindtap="savePlan"><text class="tool-icon">♡</text><text>保存方案</text></view>
+    </view>
+  </view>
+  <view class="selector">
+    <view class="selector-head">
+      <view><text class="selector-title">挑选你的窗帘</text><text class="selector-sub">点击款式，即时查看搭配</text></view><text class="more" bindtap="showProduct">商品详情 →</text>
+    </view>
+
+    <scroll-view scroll-x class="category-scroll">
+      <view class="category-row">
+        <text wx:for="{{categories}}" wx:key="*this" class="category {{selectedCategory === item ? 'active' : ''}}" data-category="{{item}}" bindtap="chooseCategory">{{item}}</text>
+      </view>
+    </scroll-view>
+
+    <scroll-view scroll-x class="swatch-scroll">
+      <view class="swatch-row">
+        <view wx:for="{{filteredProducts}}" wx:key="id" class="swatch-item {{selectedId === item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="chooseProduct">
+          <view class="swatch-image">
+            <image class="swatch-texture" src="{{item.texture}}" mode="aspectFill" />
+            <view wx:if="{{selectedId === item.id}}" class="check">✓</view>
+          </view>
+
+          <text class="swatch-name">{{item.name}}</text>
+          <text class="swatch-price">¥{{item.price}}/㎡</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="selected-line">
+      <view><text class="selected-name">{{selectedName}}</text><text class="selected-note">示意预览，最终以实物面料为准</text></view><button class="use-btn" bindtap="showProduct">查看商品</button>
+    </view>
+    <view wx:if="{{showManualHint}}" class="manual-hint">手动校准交互占位：后续支持拖动窗户四角调整预览区域。</view>
+  </view>
+</view>

@@ -1,0 +1,502 @@
+.preview-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F7F5F0;
+  overflow: hidden
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #D8C9B7;
+  overflow: hidden
+}
+
+.stage-room {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #E5D8C7 0%, #D2C0AA 65%, #B6A18B 100%)
+}
+
+.stage-glow {
+  position: absolute;
+  left: 5%;
+  top: 0;
+  width: 90%;
+  height: 70%;
+  background: linear-gradient(115deg, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 65%);
+  clip-path: polygon(0 0, 100% 0, 78% 100%, 20% 100%)
+}
+
+.stage-glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: linear-gradient(135deg, #C9D8D2, #91A7A3);
+  overflow: hidden
+}
+
+.stage-window {
+  position: absolute;
+  left: 12%;
+  top: 12%;
+  width: 76%;
+  height: 61%;
+  box-sizing: border-box;
+  border: 12rpx solid #F6F0E6;
+  background: #E5E9E3;
+  box-shadow: 0 16rpx 30rpx rgba(69, 48, 29, .16);
+  overflow: hidden;
+}
+
+
+
+.stage-curtain {
+  position: absolute;
+  top: 0;
+  width: 42%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--fabric, #E9E0D2) 0, var(--fabric, #E9E0D2) 9rpx, rgba(255, 255, 255, .55) 16rpx, rgba(255, 255, 255, .16) 22rpx);
+  box-shadow: 0 0 10rpx rgba(67, 48, 30, .12)
+}
+
+.stage-curtain.left {
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 83% 100%, 0 100%);;
+}
+
+.stage-curtain.right {
+  right: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%)
+}
+
+.stage-cross {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 8rpx;
+  background: #F6F0E6
+}
+
+.stage-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20%;
+  background: linear-gradient(180deg, #B7A38C, #9E8972)
+}
+
+.stage-plant {
+  position: absolute;
+  right: 6%;
+  bottom: 12%;
+  height: 180rpx;
+  width: 100rpx
+}
+
+.leaves {
+  position: absolute;
+  bottom: 46rpx;
+  left: 20rpx;
+  width: 62rpx;
+  height: 104rpx;
+  background: #68765D;
+  border-radius: 80% 0 80% 0;
+  transform: rotate(-18deg);
+  box-shadow: -22rpx 18rpx 0 -8rpx #7D8B6F, 18rpx 8rpx 0 -7rpx #52694F
+}
+
+.pot {
+  position: absolute;
+  bottom: 0;
+  left: 18rpx;
+  width: 58rpx;
+  height: 56rpx;
+  background: #B67E5C;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%)
+}
+
+.recognition {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  width: 70%;
+  height: 55%;
+  border: 2rpx dashed rgba(65, 133, 104, .85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 23rpx;
+  text-shadow: 0 1rpx 5rpx #5D6D62
+}
+
+.corner {
+  position: absolute;
+  width: 28rpx;
+  height: 28rpx;
+  border-color: #51B78A;
+  border-style: solid
+}
+
+.tl {
+  top: -3rpx;
+  left: -3rpx;
+  border-width: 6rpx 0 0 6rpx
+}
+
+.tr {
+  top: -3rpx;
+  right: -3rpx;
+  border-width: 6rpx 6rpx 0 0
+}
+
+.bl {
+  bottom: -3rpx;
+  left: -3rpx;
+  border-width: 0 0 6rpx 6rpx
+}
+
+.br {
+  bottom: -3rpx;
+  right: -3rpx;
+  border-width: 0 6rpx 6rpx 0
+}
+
+.stage-top {
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  top: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.status-pill {
+  background: rgba(43, 48, 42, .66);
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 12rpx 18rpx;
+  font-size: 20rpx;
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #E9BE65;
+  margin-right: 10rpx
+}
+
+.camera-button {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #55483D
+}
+
+.stage-bottom-tools {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 22rpx;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(35, 31, 27, .7);
+  border-radius: 22rpx;
+  padding: 18rpx 8rpx;
+  color: #fff
+}
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7rpx;
+  font-size: 20rpx
+}
+
+.tool-icon {
+  font-size: 34rpx
+}
+
+.selector {
+  flex: none;
+  background: #F7F5F0;
+  border-radius: 28rpx 28rpx 0 0;
+  margin-top: -20rpx;
+  position: relative;
+  padding: 26rpx 24rpx 24rpx
+}
+
+.selector-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.selector-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 700
+}
+
+.selector-sub {
+  display: block;
+  font-size: 21rpx;
+  color: #96897C;
+  margin-top: 6rpx
+}
+
+.more {
+  font-size: 22rpx;
+  color: #80664D
+}
+
+.category-scroll,
+.swatch-scroll {
+  white-space: nowrap;
+  margin-top: 18rpx
+}
+
+.category-row,
+.swatch-row {
+  display: flex;
+  gap: 14rpx
+}
+
+.category {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #EEE8DF;
+  color: #7F7469;
+  font-size: 22rpx
+}
+
+.category.active {
+  background: #55483D;
+  color: #fff
+}
+
+.swatch-row {
+  gap: 18rpx
+}
+
+.swatch-item {
+  width: 142rpx;
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0
+}
+
+.swatch-image {
+  position: relative;
+  width: 100%;
+  height: 160rpx;
+  overflow: hidden;
+  border-radius: 16rpx;
+  background-color: #f0ece6;
+}
+
+.swatch-texture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.swatch-item.selected .swatch-image {
+  border: 5rpx solid #a98262;
+}
+
+
+.check {
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  color: #fff;
+  background: #a98262;
+  border-radius: 50%;
+}
+
+.swatch-name {
+  font-size: 21rpx;
+  margin-top: 9rpx;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.swatch-price {
+  font-size: 20rpx;
+  color: #9A5B45;
+  margin-top: 4rpx
+}
+
+.selected-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #E7DED3
+}
+
+.selected-name {
+  display: block;
+  font-size: 24rpx;
+  font-weight: 650
+}
+
+.selected-note {
+  display: block;
+  margin-top: 5rpx;
+  font-size: 18rpx;
+  color: #9A8F84
+}
+
+.use-btn {
+  margin: 0 !important;
+  background: #55483D;
+  color: #fff;
+  border-radius: 14rpx;
+  font-size: 23rpx;
+  line-height: 68rpx;
+  height: 68rpx;
+  padding: 0 24rpx
+}
+
+.manual-hint {
+  margin-top: 12rpx;
+  padding: 12rpx;
+  background: #F0E5D7;
+  border-radius: 12rpx;
+  color: #725A44;
+  font-size: 21rpx
+}
+
+.camera-live {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 摄像头原生组件 */
+.camera-live {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 覆盖整个摄像头画面 */
+/* 摄像头窗框内的窗帘覆盖层 */
+.camera-curtain-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 两片窗帘共用的基础样式 */
+.camera-curtain {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  opacity: 0.92;
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 120px auto;
+
+  /* 褶皱纹理 */
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.48) 0,
+    rgba(255, 255, 255, 0.15) 5rpx,
+    rgba(80, 65, 50, 0.12) 10rpx,
+    rgba(255, 255, 255, 0.25) 15rpx
+  );
+
+  /* 平滑开合 */
+  transition: width 800ms ease-in-out;
+}
+
+/* 左片：打开时占左侧 30%，关闭时延伸至中间 */
+.camera-curtain.left {
+  left: 0;
+}
+
+.camera-curtain.left.open {
+  width: 30%;
+}
+
+.camera-curtain.left.closed {
+  width: 50%;
+}
+
+/* 右片：打开时占右侧 30%，关闭时延伸至中间 */
+.camera-curtain.right {
+  right: 0;
+}
+
+.camera-curtain.right.open {
+  width: 30%;
+}
+
+.camera-curtain.right.closed {
+  width: 50%;
+}
+
+/* 褶皱：利用明暗竖条模拟布料起伏 */
+.fold {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 12%;
+}
+
+.fold-dark {
+  background-color: rgba(70, 55, 42, 0.18);
+  left: 12%;
+}
+
+.fold-light {
+  background-color: rgba(255, 255, 255, 0.24);
+  left: 30%;
+}
+
+.fold-third {
+  left: 48%;
+}
+
+.fold-fourth {
+  left: 66%;
+}
+
+.fold-fifth {
+  left: 84%;
+}

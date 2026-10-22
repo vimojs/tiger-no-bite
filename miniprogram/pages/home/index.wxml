@@ -1,0 +1,33 @@
+<view class="page home">
+  <view class="topline">
+    <view><text class="brand">帘境</text><text class="brand-en">LIAN JING · HOME</text></view>
+    <view class="avatar-mark">帘</view>
+  </view>
+  <view class="hero">
+    <view class="hero-copy">
+      <text class="eyebrow">AI CURTAIN STUDIO</text>
+      <view class="hero-title">让每一扇窗，</view><view class="hero-title">都有喜欢的样子。</view>
+      <text class="hero-desc">用手机预览窗帘搭配，让选择更简单。</text>
+      <button class="hero-btn" bindtap="startPreview">开始 AI 试搭 ↗</button>
+    </view>
+    <view class="hero-room">
+      <view class="sunlight"></view><view class="window-frame"><view class="window-glass"><view class="curtain curtain-left"></view><view class="curtain curtain-right"></view><view class="window-mullion"></view></view></view>
+      <view class="plant"><view class="plant-leaf"></view><view class="plant-pot"></view></view>
+      <view class="room-caption">SOFT LIGHT, SOFT HOME</view>
+    </view>
+  </view>
+  <view class="benefits">
+    <view class="benefit"><text class="benefit-icon">⌗</text><text>实时预览</text></view>
+    <view class="benefit"><text class="benefit-icon">◈</text><text>多款搭配</text></view>
+    <view class="benefit"><text class="benefit-icon">♡</text><text>保存灵感</text></view>
+  </view>
+  <view class="section-head"><view><view class="section-title">为你精选</view><view class="section-sub">精选面料，让家更有温度</view></view><text class="link" bindtap="openProducts">全部商品 →</text></view>
+  <view class="product-grid">
+    <view class="product-card card" wx:for="{{featured}}" wx:key="id" data-id="{{item.id}}" bindtap="openProduct">
+      <view class="swatch-scene" style="--fabric: {{item.color}}"><view class="mini-window"><view class="mini-curtain"></view><view class="mini-curtain mini-curtain-r"></view></view><text class="product-tag">{{item.tag}}</text></view>
+      <view class="product-info"><text class="product-name">{{item.name}}</text><text class="product-desc">{{item.desc}}</text><view class="price-line"><text class="price">¥{{item.price}}</text><text class="price-unit">/㎡ 起</text><text class="try">试搭</text></view></view>
+    </view>
+  </view>
+  <view class="bottom-banner" bindtap="startPreview"><view><text class="banner-title">不知道哪款适合你？</text><text class="banner-sub">打开摄像头，放进自己的家看看</text></view><text class="banner-arrow">→</text></view>
+  <custom-tab-bar />
+</view>
