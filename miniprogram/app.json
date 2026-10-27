@@ -29,7 +29,13 @@
       }
     ]
   },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于在真实窗户场景中进行窗帘 AR 试搭"
+    }
+  },
   "usingComponents": {},
+  "lazyCodeLoading": "requiredComponents",
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

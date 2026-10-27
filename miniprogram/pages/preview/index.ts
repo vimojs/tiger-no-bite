@@ -10,15 +10,22 @@ Page({
     selectedCategory: '全部' as CategoryFilter,
     categories: ['全部', '纱帘', '布帘', '遮光帘'] as CategoryFilter[],
     statusText: '准备开启摄像头',
-    cameraReady: false,
-    cameraAuthorized: true,
-    showManualHint: false,
     selectedName: '米白柔纱帘',
-    selectedColor: '#E9E0D2',
-    selectedTexture: '/assets/curtains/c1.jpg',
+    selectedTexture: '/assets/curtains/c1.png',
     selectedPrice: 199,
+    transmission: 72,
+    ambientLight: 65,
+    lightLabel: '明亮日光',
+    lightBeamOpacity: 0.22,
+    curtainWidth: 1.4,
+    curtainHeight: 1.8,
+    curtainWidthLabel: '1.4',
+    curtainHeightLabel: '1.8',
     filteredProducts: curtains as CurtainProduct[],
     cameraActive: false,
+    cameraStarting: false,
+    cameraOnlyDiagnostic: true,
+    curtainPlaced: false,
     curtainClosed: false,
   },
 
@@ -35,17 +42,50 @@ Page({
     if (this.data.cameraActive) {
       this.setData({
         cameraActive: false,
-        cameraReady: false,
+        cameraStarting: false,
+        curtainPlaced: false,
         curtainClosed: false,
         statusText: '摄像头已关闭'
       })
       return
     }
   
-    // 摄像头未开启，点击启动
+    if (this.data.cameraStarting) return
+    this.setData({ cameraStarting: true, statusText: '正在检查相机权限…' })
+    wx.getSetting({
+      success: (result) => {
+        if (result.authSetting['scope.camera']) {
+          this.startARCamera()
+          return
+        }
+        wx.authorize({
+          scope: 'scope.camera',
+          success: () => this.startARCamera(),
+          fail: () => {
+            this.setData({ cameraStarting: false, statusText: '相机权限未开启' })
+            wx.showModal({
+              title: '需要相机权限',
+              content: 'AR 试搭需要使用相机。请在设置中允许帘境访问相机。',
+              confirmText: '去设置',
+              success: (modal) => {
+                if (modal.confirm) wx.openSetting({})
+              }
+            })
+          }
+        })
+      },
+      fail: () => {
+        this.setData({ cameraStarting: false, statusText: '无法读取相机权限状态' })
+      }
+    })
+  },
+
+  startARCamera(): void {
     this.setData({
+      cameraStarting: false,
       cameraActive: true,
-      statusText: '正在启动摄像头…'
+      curtainPlaced: false,
+      statusText: '正在启动 AR 相机…'
     })
   },
 
@@ -73,14 +113,42 @@ Page({
     this.setData({
       selectedId: product.id,
       selectedName: product.name,
-      selectedColor: product.color,
       selectedPrice: product.price,
-      selectedTexture: product.texture
+      selectedTexture: product.texture,
+      transmission: product.lightTransmission
     })
   },
 
-  toggleManual(): void {
-    this.setData({ showManualHint: !this.data.showManualHint })
+  changeAmbientLight(event: WechatMiniprogram.SliderChange): void {
+    const ambientLight = Number(event.detail.value)
+    this.setData({ ambientLight, lightLabel: ambientLight > 75 ? '强烈日光' : ambientLight > 45 ? '明亮日光' : ambientLight > 25 ? '柔和日光' : '傍晚微光', lightBeamOpacity: 0.05 + ambientLight / 350 })
+  },
+
+  changeTransmission(event: WechatMiniprogram.SliderChange): void {
+    this.setData({ transmission: Number(event.detail.value) })
+  },
+
+  changeCurtainWidth(event: WechatMiniprogram.SliderChange): void {
+    const curtainWidth = Number(event.detail.value)
+    this.setData({ curtainWidth, curtainWidthLabel: curtainWidth.toFixed(1) })
+  },
+
+  changeCurtainHeight(event: WechatMiniprogram.SliderChange): void {
+    const curtainHeight = Number(event.detail.value)
+    this.setData({ curtainHeight, curtainHeightLabel: curtainHeight.toFixed(1) })
+  },
+
+  onARStatus(event: WechatMiniprogram.CustomEvent): void {
+    const detail = event.detail as { placed?: boolean; message?: string }
+    this.setData({
+      curtainPlaced: detail.placed === undefined ? this.data.curtainPlaced : detail.placed,
+      statusText: detail.message || this.data.statusText
+    })
+  },
+
+  resetARPlacement(): void {
+    const arCurtain = this.selectComponent('#arCurtain') as any
+    if (arCurtain && typeof arCurtain.resetPlacement === 'function') arCurtain.resetPlacement()
   },
 
   savePlan(): void {
@@ -101,34 +169,4 @@ Page({
     })
   },
 
-  startCamera(): void {
-    this.setData({
-      cameraActive: true,
-      statusText: '正在启动摄像头…'
-    })
-  },
-  
-  
-  onCameraReady(): void {
-    this.setData({
-      cameraReady: true,
-      statusText: '摄像头已开启 · 可开始选款'
-    })
-  },
-  
-  onCameraError(event: WechatMiniprogram.CustomEvent): void {
-    console.error('摄像头启动失败：', event.detail)
-  
-    this.setData({
-      cameraActive: false,
-      cameraReady: false,
-      statusText: '摄像头启动失败 · 可重试'
-    })
-  
-    wx.showModal({
-      title: '无法开启摄像头',
-      content: '请检查微信摄像头权限，并在真机上重新尝试。',
-      showCancel: false
-    })
-  },
 })

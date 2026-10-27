@@ -1,1 +1,7 @@
-{"navigationBarTitleText":"AI 实时试搭","disableScroll":true}
+{
+  "navigationBarTitleText": "AI 实时试搭",
+  "disableScroll": true,
+  "usingComponents": {
+    "ar-curtain": "../../components/ar-curtain/index"
+  }
+}

@@ -9,6 +9,8 @@ export interface CurtainProduct {
   color: string
   texture: string
   desc: string
+  /** Visual estimate only; 0 is opaque and 100 is highly translucent. */
+  lightTransmission: number
 }
 
 export interface SavedPlan {

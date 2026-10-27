@@ -1,0 +1,4 @@
+<!-- Camera-only baseline: isolate XR-Frame video rendering from VisionKit plane tracking. -->
+<xr-scene id="curtain-scene" ar-system="camera:Back" bind:ready="handleReady">
+  <xr-camera id="ar-camera" node-id="ar-camera" background="ar" />
+</xr-scene>

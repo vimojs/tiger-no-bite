@@ -9,8 +9,9 @@ export const curtains: CurtainProduct[] = [
     price: 199,
     tag: '热销',
     color: '#E9E0D2',
-    texture: '/assets/curtains/c1.jpg',
-    desc: '轻盈透光，柔和自然光'
+    texture: '/assets/curtains/c1.png',
+    desc: '轻盈透光，柔和自然光',
+    lightTransmission: 72
   },
   {
     id: 'c2',
@@ -19,7 +20,8 @@ export const curtains: CurtainProduct[] = [
     price: 299,
     tag: '高遮光',
     color: '#A8AAA7',
-    texture: '/assets/curtains/c2.jpg',
-    desc: '简约耐看，适合卧室'
+    texture: '/assets/curtains/c2.png',
+    desc: '简约耐看，适合卧室',
+    lightTransmission: 12
   },  
 ]

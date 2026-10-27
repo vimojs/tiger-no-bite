@@ -1,10 +1,10 @@
 <view class="preview-page">
   <view class="stage">
-    <view class="stage-room">
-      <view class="stage-glow"></view>
+    <view class="stage-room" wx:if="{{!cameraActive}}">
+      <view class="stage-glow" wx:if="{{!cameraActive}}" style="opacity: {{lightBeamOpacity}}"></view>
       <view class="stage-window">
 
-        <view class="stage-glass" wx:if="{{!cameraReady}}">
+        <view class="stage-glass" wx:if="{{!cameraActive}}">
           <!-- 左侧真实花色 -->
           <view class="stage-curtain left">
             <image class="stage-curtain-texture" src="{{selectedTexture}}" mode="aspectFill" />
@@ -18,41 +18,20 @@
           <view class="stage-cross"></view>
         </view>
 
-        <camera wx:if="{{cameraActive}}" class="camera-live" device-position="back" flash="off" bindinitdone="onCameraReady" binderror="onCameraError" />
-
-        <!-- 摄像头两侧固定窗帘 -->
-        <cover-view wx:if="{{cameraReady}}" class="camera-curtain-overlay">
-          <!-- 左侧窗帘 -->
-          <cover-view class="camera-curtain left {{curtainClosed ? 'closed' : 'open'}}" style="background-color: {{selectedColor}}; background-image: url('{{selectedTexture}}');">
-            <cover-view class="fold fold-dark"></cover-view>
-            <cover-view class="fold fold-light"></cover-view>
-            <cover-view class="fold fold-dark fold-third"></cover-view>
-            <cover-view class="fold fold-light fold-fourth"></cover-view>
-            <cover-view class="fold fold-dark fold-fifth"></cover-view>
-          </cover-view>
-
-          <!-- 右侧窗帘 -->
-          <cover-view class="camera-curtain right {{curtainClosed ? 'closed' : 'open'}}" style="background-color: {{selectedColor}}; background-image: url('{{selectedTexture}}');">
-            <cover-view class="fold fold-dark"></cover-view>
-            <cover-view class="fold fold-light"></cover-view>
-            <cover-view class="fold fold-dark fold-third"></cover-view>
-            <cover-view class="fold fold-light fold-fourth"></cover-view>
-            <cover-view class="fold fold-dark fold-fifth"></cover-view>
-          </cover-view>
-        </cover-view>
       </view>
-      <view class="stage-floor"></view>
-      <view class="stage-plant">
+      <view class="stage-floor" wx:if="{{!cameraActive}}"></view>
+      <view class="stage-plant" wx:if="{{!cameraActive}}">
         <view class="leaves"></view>
         <view class="pot"></view>
       </view>
-      <view class="recognition">
+      <view class="recognition" wx:if="{{!cameraActive}}">
         <view class="corner tl"></view>
         <view class="corner tr"></view>
         <view class="corner bl"></view>
         <view class="corner br"></view><text>窗户区域示意</text>
       </view>
     </view>
+    <ar-curtain wx:if="{{cameraActive}}" id="arCurtain" class="ar-curtain" selected-id="{{selectedId}}" width="{{curtainWidth}}" height="{{curtainHeight}}" transmission="{{transmission}}" ambient-light="{{ambientLight}}" closed="{{curtainClosed}}" bind:arstatus="onARStatus" />
     <view class="stage-top">
       <view class="status-pill">
         <view class="status-dot"></view>{{statusText}}
@@ -60,8 +39,8 @@
       <view class="camera-button" bindtap="toggleCamera">{{cameraActive ? '×' : '◎'}}</view>
     </view>
     <view class="stage-bottom-tools">
-      <view class="tool" bindtap="toggleManual"><text class="tool-icon">⌗</text><text>调整窗框</text></view>
-      <view class="tool" bindtap="toggleCurtain" wx:if="{{cameraActive}}">
+      <view class="tool" bindtap="resetARPlacement" wx:if="{{cameraActive && curtainPlaced && !cameraOnlyDiagnostic}}"><text class="tool-icon">⌖</text><text>重新放置</text></view>
+      <view class="tool" bindtap="toggleCurtain" wx:if="{{cameraActive && !cameraOnlyDiagnostic}}">
         <text class="tool-icon">{{curtainClosed ? '◧' : '◨'}}</text>
         <text>{{curtainClosed ? '打开窗帘' : '关闭窗帘'}}</text>
       </view>
@@ -100,6 +79,18 @@
     <view class="selected-line">
       <view><text class="selected-name">{{selectedName}}</text><text class="selected-note">示意预览，最终以实物面料为准</text></view><button class="use-btn" bindtap="showProduct">查看商品</button>
     </view>
-    <view wx:if="{{showManualHint}}" class="manual-hint">手动校准交互占位：后续支持拖动窗户四角调整预览区域。</view>
+    <view class="light-controls" wx:if="{{!cameraActive || !cameraOnlyDiagnostic}}">
+      <block wx:if="{{cameraActive}}">
+        <view class="light-control-head"><text>窗帘宽度</text><text>{{curtainWidthLabel}} m</text></view>
+        <slider min="0.6" max="3" step="0.1" value="{{curtainWidth}}" activeColor="#b58b64" block-size="18" bindchange="changeCurtainWidth" />
+        <view class="light-control-head"><text>窗帘高度</text><text>{{curtainHeightLabel}} m</text></view>
+        <slider min="0.6" max="3" step="0.1" value="{{curtainHeight}}" activeColor="#b58b64" block-size="18" bindchange="changeCurtainHeight" />
+      </block>
+      <view class="light-control-head"><text>光线模拟 · {{lightLabel}}</text><text>{{ambientLight}}%</text></view>
+      <slider min="0" max="100" value="{{ambientLight}}" activeColor="#b58b64" block-size="18" bindchanging="changeAmbientLight" bindchange="changeAmbientLight" />
+      <view class="light-control-head"><text>面料透光模拟</text><text>{{transmission}}%</text></view>
+      <slider min="0" max="100" value="{{transmission}}" activeColor="#b58b64" block-size="18" bindchanging="changeTransmission" bindchange="changeTransmission" />
+      <text class="simulation-note">光线与透光率为视觉模拟值，不代表实测照度或商品检测数据</text>
+    </view>
   </view>
 </view>

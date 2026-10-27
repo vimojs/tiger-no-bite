@@ -175,7 +175,8 @@
   top: 24rpx;
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
+  z-index: 4
 }
 
 .status-pill {
@@ -221,6 +222,7 @@
   background: rgba(35, 31, 27, .7);
   border-radius: 22rpx;
   padding: 18rpx 8rpx;
+  z-index: 4;
   color: #fff
 }
 
@@ -384,119 +386,34 @@
   padding: 0 24rpx
 }
 
-.manual-hint {
-  margin-top: 12rpx;
-  padding: 12rpx;
-  background: #F0E5D7;
-  border-radius: 12rpx;
-  color: #725A44;
-  font-size: 21rpx
-}
-
-.camera-live {
+.ar-curtain {
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 
-/* 摄像头原生组件 */
-.camera-live {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+.light-controls {
+  margin-top: 16rpx;
+  padding: 14rpx 16rpx 10rpx;
+  background: #f0ece5;
+  border-radius: 16rpx;
 }
 
-/* 覆盖整个摄像头画面 */
-/* 摄像头窗框内的窗帘覆盖层 */
-.camera-curtain-overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
+.light-control-head {
+  display: flex;
+  justify-content: space-between;
+  color: #695b4c;
+  font-size: 21rpx;
 }
 
-/* 两片窗帘共用的基础样式 */
-.camera-curtain {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  opacity: 0.92;
-  background-repeat: repeat;
-  background-position: center;
-  background-size: 120px auto;
-
-  /* 褶皱纹理 */
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.48) 0,
-    rgba(255, 255, 255, 0.15) 5rpx,
-    rgba(80, 65, 50, 0.12) 10rpx,
-    rgba(255, 255, 255, 0.25) 15rpx
-  );
-
-  /* 平滑开合 */
-  transition: width 800ms ease-in-out;
+.light-controls slider {
+  margin: 8rpx 4rpx 14rpx;
 }
 
-/* 左片：打开时占左侧 30%，关闭时延伸至中间 */
-.camera-curtain.left {
-  left: 0;
-}
-
-.camera-curtain.left.open {
-  width: 30%;
-}
-
-.camera-curtain.left.closed {
-  width: 50%;
-}
-
-/* 右片：打开时占右侧 30%，关闭时延伸至中间 */
-.camera-curtain.right {
-  right: 0;
-}
-
-.camera-curtain.right.open {
-  width: 30%;
-}
-
-.camera-curtain.right.closed {
-  width: 50%;
-}
-
-/* 褶皱：利用明暗竖条模拟布料起伏 */
-.fold {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 12%;
-}
-
-.fold-dark {
-  background-color: rgba(70, 55, 42, 0.18);
-  left: 12%;
-}
-
-.fold-light {
-  background-color: rgba(255, 255, 255, 0.24);
-  left: 30%;
-}
-
-.fold-third {
-  left: 48%;
-}
-
-.fold-fourth {
-  left: 66%;
-}
-
-.fold-fifth {
-  left: 84%;
+.simulation-note {
+  display: block;
+  color: #9a8f84;
+  font-size: 17rpx;
 }
