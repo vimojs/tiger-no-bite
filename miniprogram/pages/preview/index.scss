@@ -212,6 +212,21 @@
   color: #55483D
 }
 
+.runtime-hint {
+  position: absolute;
+  top: 108rpx;
+  left: 24rpx;
+  right: 24rpx;
+  z-index: 4;
+  padding: 16rpx 20rpx;
+  border-radius: 16rpx;
+  background: rgba(43, 48, 42, .72);
+  color: #fff;
+  font-size: 22rpx;
+  line-height: 1.5;
+  text-align: center
+}
+
 .stage-bottom-tools {
   position: absolute;
   left: 20rpx;

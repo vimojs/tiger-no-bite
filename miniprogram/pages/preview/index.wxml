@@ -38,6 +38,9 @@
       </view>
       <view class="camera-button" bindtap="toggleCamera">{{cameraActive ? '×' : '◎'}}</view>
     </view>
+    <view wx:if="{{isDevtools}}" class="runtime-hint">
+      AR 相机需要微信真机运行；开发者工具模拟器不支持 XR-Frame 相机。
+    </view>
     <view class="stage-bottom-tools">
       <view class="tool" bindtap="resetARPlacement" wx:if="{{cameraActive && curtainPlaced && !cameraOnlyDiagnostic}}"><text class="tool-icon">⌖</text><text>重新放置</text></view>
       <view class="tool" bindtap="toggleCurtain" wx:if="{{cameraActive && !cameraOnlyDiagnostic}}">

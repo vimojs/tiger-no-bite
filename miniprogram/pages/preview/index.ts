@@ -24,6 +24,7 @@ Page({
     filteredProducts: curtains as CurtainProduct[],
     cameraActive: false,
     cameraStarting: false,
+    isDevtools: false,
     cameraOnlyDiagnostic: true,
     curtainPlaced: false,
     curtainClosed: false,
@@ -38,6 +39,17 @@ Page({
   },
 
   toggleCamera(): void {
+    // XR-Frame 的 ar-system 只能在微信小程序真机运行环境中使用，开发者工具模拟器不支持。
+    if (wx.getSystemInfoSync().platform === 'devtools') {
+      this.setData({
+        cameraActive: false,
+        cameraStarting: false,
+        statusText: '请使用微信真机预览 AR 相机'
+      })
+      wx.showToast({ title: 'AR 相机请在真机预览', icon: 'none' })
+      return
+    }
+
     // 摄像头已开启，再次点击则关闭
     if (this.data.cameraActive) {
       this.setData({
@@ -90,6 +102,12 @@ Page({
   },
 
   onLoad(options: Record<string, string | undefined>): void {
+    const isDevtools = wx.getSystemInfoSync().platform === 'devtools'
+    this.setData({
+      isDevtools,
+      statusText: isDevtools ? '开发者工具不支持 AR，请真机预览' : this.data.statusText
+    })
+
     const id = options.productId
     if (id) this.selectProductById(id)
   },
@@ -139,7 +157,10 @@ Page({
   },
 
   onARStatus(event: WechatMiniprogram.CustomEvent): void {
-    const detail = event.detail as { placed?: boolean; message?: string }
+    const detail = event.detail as { placed?: boolean; message?: string; stage?: string }
+    // Scene readiness is not the same as camera readiness; only surface AR session state.
+    if (detail.stage === 'camera-renderer-ready') return
+
     this.setData({
       curtainPlaced: detail.placed === undefined ? this.data.curtainPlaced : detail.placed,
       statusText: detail.message || this.data.statusText
